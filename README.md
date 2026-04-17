@@ -113,6 +113,8 @@ task deploy
 task undeploy
 ```
 
+These tasks are intended for POSIX shells on Linux and macOS.
+
 Both tasks accept overrides for the install and config locations when you need a safe or custom target:
 
 ```bash

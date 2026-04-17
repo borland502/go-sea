@@ -87,7 +87,7 @@ var (
 	cfgFile          string
 	loadedConfigPath string
 	cfg              = defaultConfig()
-	searchConfigFile = xdgSearchConfigFile
+	searchConfigFile = searchConfigFileInXDGPaths
 )
 
 func defaultConfig() Config {
@@ -278,17 +278,29 @@ func configureConfigFile(loader *viper.Viper) (bool, error) {
 	return true, nil
 }
 
-func xdgSearchConfigFile(relPath string) (string, error) {
-	configPath, err := xdg.SearchConfigFile(relPath)
-	if err != nil {
-		if strings.HasPrefix(err.Error(), "could not locate `") {
-			return "", errConfigFileNotFound
+func searchConfigFileInXDGPaths(relPath string) (string, error) {
+	searchPaths := append([]string{xdg.ConfigHome}, xdg.ConfigDirs...)
+	searchedPaths := make([]string, 0, len(searchPaths))
+
+	for _, basePath := range searchPaths {
+		candidatePath := filepath.Join(basePath, relPath)
+		info, err := os.Stat(candidatePath)
+		if err == nil {
+			if info.IsDir() {
+				return "", fmt.Errorf("config path is a directory: %s", candidatePath)
+			}
+
+			return candidatePath, nil
+		}
+		if errors.Is(err, os.ErrNotExist) {
+			searchedPaths = append(searchedPaths, filepath.Dir(candidatePath))
+			continue
 		}
 
-		return "", err
+		return "", fmt.Errorf("stat config path %s: %w", candidatePath, err)
 	}
 
-	return configPath, nil
+	return "", fmt.Errorf("%w: %s", errConfigFileNotFound, strings.Join(searchedPaths, ", "))
 }
 
 func writableConfigFilePath() (string, error) {
