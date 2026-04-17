@@ -11,7 +11,7 @@ import (
 const skipTaskIntegrationEnv = "GSEA_SKIP_TASK_INTEGRATION"
 
 func TestTaskUndeployPreservesExistingConfig(t *testing.T) {
-	shouldSkipTaskIntegration(t)
+	skipTaskIntegrationIfNeeded(t)
 
 	installDir := t.TempDir()
 	configDir := t.TempDir()
@@ -43,7 +43,7 @@ func TestTaskUndeployPreservesExistingConfig(t *testing.T) {
 }
 
 func TestTaskUndeployRemovesGeneratedConfig(t *testing.T) {
-	shouldSkipTaskIntegration(t)
+	skipTaskIntegrationIfNeeded(t)
 
 	installDir := t.TempDir()
 	configDir := t.TempDir()
@@ -72,7 +72,7 @@ func TestTaskUndeployRemovesGeneratedConfig(t *testing.T) {
 	}
 }
 
-func shouldSkipTaskIntegration(t *testing.T) {
+func skipTaskIntegrationIfNeeded(t *testing.T) {
 	t.Helper()
 
 	if os.Getenv(skipTaskIntegrationEnv) == "1" {
