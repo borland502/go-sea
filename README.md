@@ -28,7 +28,7 @@ Run the example directly:
 
 ```bash
 go run . example
-go run . example --config ./gsea.example.toml --color=false
+go run . example --config ./configs/gsea.toml --color=false
 ```
 
 Create a starter config in the default XDG location:
@@ -48,7 +48,7 @@ The default user config path is:
 You can also point the CLI at an explicit config file:
 
 ```bash
-go run . example --config ./gsea.example.toml
+go run . example --config ./configs/gsea.toml
 ```
 
 Example config structure:
@@ -94,6 +94,7 @@ GSEA_PALETTE_PURPLE="#A178FF" go run . example
 
 - `gsea example`: run the example program
 - `gsea init-config`: write a starter config file
+- `gsea version`: show build version metadata
 
 ## Development
 
@@ -103,8 +104,11 @@ Common workflows are in `Taskfile.yml`:
 task fmt
 task check
 task build
-task example -- --config ./gsea.example.toml --color=false
+task example -- --config ./configs/gsea.toml --color=false
 ```
+
+`task build` writes the full local binary to `./tmp/build/gsea` so it
+is not disturbed by `go test ./...`.
 
 Local install and removal tasks are also available:
 
@@ -121,6 +125,10 @@ Both tasks accept overrides for the install and config locations when you need a
 task deploy INSTALL_DIR=./tmp/bin CONFIG_PATH=./tmp/gsea/config.toml
 task undeploy INSTALL_DIR=./tmp/bin CONFIG_PATH=./tmp/gsea/config.toml
 ```
+
+`task deploy` installs a stripped binary, while `task undeploy`
+removes the installed binary, any task-generated config file, and local
+build artifacts for the project.
 
 ## Workflow Credit
 

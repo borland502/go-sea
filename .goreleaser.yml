@@ -5,6 +5,7 @@ project_name: gsea
 before:
   hooks:
     - go mod tidy
+    - go test ./...
 
 builds:
   - id: gsea
@@ -19,9 +20,30 @@ builds:
     goarch:
       - amd64
       - arm64
+    ldflags:
+      - -s -w
+      - -X go-sea/internal/version.Version={{.Version}}
+      - -X go-sea/internal/version.Commit={{.Commit}}
+      - -X go-sea/internal/version.Date={{.Date}}
 
 checksum:
   name_template: checksums.txt
+
+archives:
+  - id: tarball
+    format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE
+      - configs/gsea.toml
+  - id: zipball
+    format: zip
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE
+      - configs/gsea.toml
 
 snapshot:
   version_template: "{{ incpatch .Version }}-next"
@@ -32,7 +54,14 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+      - "^chore:"
+      - "^ci:"
+      - Merge pull request
+      - Merge branch
 
 release:
+  draft: false
+  prerelease: auto
+  name_template: "{{.ProjectName}} {{.Version}}"
   footer: |
     Maintained by Jeremy Hettenhouser <jhettenh@gmail.com>.

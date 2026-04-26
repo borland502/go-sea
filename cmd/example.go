@@ -54,7 +54,7 @@ var exampleCmd = &cobra.Command{
 
 		paletteLabel.Fprintf(cmd.OutOrStdout(), "Palette")
 		fmt.Fprintf(cmd.OutOrStdout(), ": %s (compact curated subset)\n", paletteName)
-		printPaletteGrid(cmd.OutOrStdout(), cfg.Palette.entries(), paletteGridColumns)
+		printPaletteGrid(cmd.OutOrStdout(), cfg.Palette.Entries(), paletteGridColumns)
 
 		if cfg.Output.ShowPaths {
 			fmt.Fprintln(cmd.OutOrStdout())
@@ -131,7 +131,7 @@ func paletteSwatch(hex string) string {
 	return bgRGBColorFromHex(hex).Sprint("    ")
 }
 
-func printPaletteGrid(writer io.Writer, entries []paletteEntry, columns int) {
+func printPaletteGrid(writer io.Writer, entries []PaletteEntry, columns int) {
 	for index, entry := range entries {
 		entryColor := rgbColorFromHex(entry.Hex, color.Bold)
 		entryColor.Fprintf(writer, "  %-7s", entry.Key)

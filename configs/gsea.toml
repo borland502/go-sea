@@ -15,7 +15,7 @@
 #   https://github.com/borland502/nix-config/blob/main/home-manager/config/colors/monokai.base24.yaml
 #
 # You can also pass this file explicitly with:
-#   gsea example --config ./gsea.example.toml
+#   gsea example --config ./configs/gsea.toml
 
 [example]
 greeting = "Ahoy"
