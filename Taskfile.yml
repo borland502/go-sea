@@ -4,10 +4,26 @@ vars:
   APP_NAME: gsea
   BUILD_DIR: ./tmp/build
   BUILD_TARGET: '{{.BUILD_DIR}}/{{.APP_NAME}}'
+  VERSION_PACKAGE: github.com/borland502/go-sea/internal/version
+  BUILD_VERSION:
+    sh: |
+      version="$(git describe --tags --always --dirty --match 'v*.*.*' 2>/dev/null || true)"
+      if [ -n "$version" ]; then
+        printf '%s' "$version"
+      else
+        printf 'dev'
+      fi
+  BUILD_COMMIT:
+    sh: |
+      git rev-parse --short=12 HEAD
+  BUILD_DATE:
+    sh: |
+      git show -s --format=%cI HEAD
+  BUILD_GO_LDFLAGS: -s -w -buildid= -X {{.VERSION_PACKAGE}}.Version={{.BUILD_VERSION}} -X {{.VERSION_PACKAGE}}.Commit={{.BUILD_COMMIT}} -X {{.VERSION_PACKAGE}}.Date={{.BUILD_DATE}}
   DEPLOY_BUILD_DIR: ./tmp/deploy-build
   DEPLOY_BUILD_TARGET: '{{.DEPLOY_BUILD_DIR}}/{{.APP_NAME}}'
   DEPLOY_GO_BUILD_FLAGS: -trimpath -buildvcs=false
-  DEPLOY_GO_LDFLAGS: -s -w -buildid=
+  DEPLOY_GO_LDFLAGS: '{{.BUILD_GO_LDFLAGS}}'
   LEGACY_BUILD_DIR: ./bin
   GO_PACKAGES: ./...
   INSTALL_DIR:
@@ -101,7 +117,7 @@ tasks:
       - vet
     cmds:
       - mkdir -p {{.BUILD_DIR}}
-      - go build -o {{.BUILD_TARGET}} .
+      - go build -ldflags "{{.BUILD_GO_LDFLAGS}}" -o {{.BUILD_TARGET}} .
     sources:
       - cmd/**/*.go
       - main.go
