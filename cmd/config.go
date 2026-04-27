@@ -15,9 +15,9 @@ import (
 )
 
 const (
-	appName                  = "gsea"
-	binaryName               = "gsea"
-	envPrefix                = "GSEA"
+	appName                  = "go-sea"
+	binaryName               = "go-sea"
+	envPrefix                = "GOSEA"
 	configBaseName           = "config"
 	configExtension          = "toml"
 	exampleSectionKey        = "example"

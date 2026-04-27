@@ -1,12 +1,12 @@
-# Example configuration for gsea.
+# Example configuration for go-sea.
 #
 # Preferred XDG layout:
-#   Linux:   $XDG_CONFIG_HOME/gsea/config.toml or ~/.config/gsea/config.toml
-#   macOS:   ~/Library/Application Support/gsea/config.toml
-#   Windows: %LOCALAPPDATA%\gsea\config.toml
+#   Linux:   $XDG_CONFIG_HOME/go-sea/config.toml or ~/.config/go-sea/config.toml
+#   macOS:   ~/Library/Application Support/go-sea/config.toml
+#   Windows: %LOCALAPPDATA%\go-sea\config.toml
 #
 # Generate the default file automatically with:
-#   gsea init-config
+#   go-sea init-config
 #
 # Curated palette subset:
 #   one black, one gray, one white, and six accent colors
@@ -15,7 +15,7 @@
 #   https://github.com/borland502/nix-config/blob/main/home-manager/config/colors/monokai.base24.yaml
 #
 # You can also pass this file explicitly with:
-#   gsea example --config ./configs/gsea.toml
+#   go-sea example --config ./configs/go-sea.toml
 
 [example]
 greeting = "Ahoy"

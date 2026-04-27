@@ -8,7 +8,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:          binaryName,
-	Short:        "Run the gsea example CLI with configurable output and palette settings",
+	Short:        "Run the go-sea example CLI with configurable output and palette settings",
 	SilenceUsage: true,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		if shouldSkipConfigLoad(cmd) {

@@ -1,6 +1,6 @@
 version: 2
 
-project_name: gsea
+project_name: go-sea
 
 before:
   hooks:
@@ -10,7 +10,7 @@ before:
 builds:
   - id: gsea
     main: .
-    binary: gsea
+    binary: go-sea
     env:
       - CGO_ENABLED=0
     goos:
@@ -36,14 +36,14 @@ archives:
     files:
       - README.md
       - LICENSE
-      - configs/gsea.toml
+      - configs/go-sea.toml
   - id: zipball
     format: zip
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     files:
       - README.md
       - LICENSE
-      - configs/gsea.toml
+      - configs/go-sea.toml
 
 snapshot:
   version_template: "{{ incpatch .Version }}-next"

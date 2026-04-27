@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  APP_NAME: gsea
+  APP_NAME: go-sea
   BUILD_DIR: ./tmp/build
   BUILD_TARGET: '{{.BUILD_DIR}}/{{.APP_NAME}}'
   VERSION_PACKAGE: github.com/borland502/go-sea/internal/version

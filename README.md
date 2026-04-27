@@ -1,6 +1,6 @@
 # go-sea
 
-`go-sea` is a small example CLI that builds to the `gsea` binary and demonstrates how to combine these Go libraries in one project:
+`go-sea` is a small example CLI that builds to the `go-sea` binary and demonstrates how to combine these Go libraries in one project:
 
 - [`spf13/cobra`](https://github.com/spf13/cobra) for commands and flags
 - [`spf13/viper`](https://github.com/spf13/viper) for config files, environment variables, and flag binding
@@ -28,7 +28,7 @@ Run the example directly:
 
 ```bash
 go run . example
-go run . example --config ./configs/gsea.toml --color=false
+go run . example --config ./configs/go-sea.toml --color=false
 ```
 
 Create a starter config in the default XDG location:
@@ -41,14 +41,14 @@ go run . init-config
 
 The default user config path is:
 
-- Linux: `$XDG_CONFIG_HOME/gsea/config.toml` or `~/.config/gsea/config.toml`
-- macOS: `~/Library/Application Support/gsea/config.toml`
-- Windows: `%LOCALAPPDATA%\gsea\config.toml`
+- Linux: `$XDG_CONFIG_HOME/go-sea/config.toml` or `~/.config/go-sea/config.toml`
+- macOS: `~/Library/Application Support/go-sea/config.toml`
+- Windows: `%LOCALAPPDATA%\go-sea\config.toml`
 
 You can also point the CLI at an explicit config file:
 
 ```bash
-go run . example --config ./configs/gsea.toml
+go run . example --config ./configs/go-sea.toml
 ```
 
 Example config structure:
@@ -85,16 +85,16 @@ https://github.com/borland502/nix-config/blob/main/home-manager/config/colors/mo
 Environment variables override config values. Examples:
 
 ```bash
-GSEA_EXAMPLE_NAME="Dock Crew" go run . example
-GSEA_OUTPUT_SHOW_PATHS=false go run . example
-GSEA_PALETTE_PURPLE="#A178FF" go run . example
+GOSEA_EXAMPLE_NAME="Dock Crew" go run . example
+GOSEA_OUTPUT_SHOW_PATHS=false go run . example
+GOSEA_PALETTE_PURPLE="#A178FF" go run . example
 ```
 
 ## Commands
 
-- `gsea example`: run the example program
-- `gsea init-config`: write a starter config file
-- `gsea version`: show build version metadata
+- `go-sea example`: run the example program
+- `go-sea init-config`: write a starter config file
+- `go-sea version`: show build version metadata
 
 ## Development
 
@@ -104,10 +104,10 @@ Common workflows are in `Taskfile.yml`:
 task fmt
 task check
 task build
-task example -- --config ./configs/gsea.toml --color=false
+task example -- --config ./configs/go-sea.toml --color=false
 ```
 
-`task build` writes the full local binary to `./tmp/build/gsea` so it
+`task build` writes the full local binary to `./tmp/build/go-sea` so it
 is not disturbed by `go test ./...`.
 
 Local install and removal tasks are also available:
@@ -122,8 +122,8 @@ These tasks are intended for POSIX shells on Linux and macOS.
 Both tasks accept overrides for the install and config locations when you need a safe or custom target:
 
 ```bash
-task deploy INSTALL_DIR=./tmp/bin CONFIG_PATH=./tmp/gsea/config.toml
-task undeploy INSTALL_DIR=./tmp/bin CONFIG_PATH=./tmp/gsea/config.toml
+task deploy INSTALL_DIR=./tmp/bin CONFIG_PATH=./tmp/go-sea/config.toml
+task undeploy INSTALL_DIR=./tmp/bin CONFIG_PATH=./tmp/go-sea/config.toml
 ```
 
 `task deploy` installs a stripped binary, while `task undeploy`

@@ -65,7 +65,7 @@ var exampleCmd = &cobra.Command{
 		}
 
 		fmt.Fprintln(cmd.OutOrStdout())
-		muted.Fprintln(cmd.OutOrStdout(), "Try overrides with --name, GSEA_EXAMPLE_NAME, or GSEA_PALETTE_PURPLE.")
+		muted.Fprintln(cmd.OutOrStdout(), "Try overrides with --name, GOSEA_EXAMPLE_NAME, or GOSEA_PALETTE_PURPLE.")
 	},
 }
 
