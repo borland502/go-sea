@@ -3,7 +3,7 @@
 //
 // Usage in ldflags:
 //
-//	-ldflags "-X go-sea/internal/version.Version=v1.2.3 ..."
+//	-ldflags "-X github.com/borland502/go-sea/internal/version.Version=v1.2.3 ..."
 package version
 
 // Version is the semantic version of the build (e.g., "v1.2.3", or "dev" for debug builds).
