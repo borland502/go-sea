@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"go-sea/internal/version"
+	"github.com/borland502/go-sea/internal/version"
 
 	"github.com/spf13/cobra"
 )

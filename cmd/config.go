@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"go-sea/internal/appconfig"
+	"github.com/borland502/go-sea/internal/appconfig"
 
 	"github.com/adrg/xdg"
 	"github.com/spf13/cobra"
