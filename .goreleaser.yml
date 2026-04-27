@@ -22,9 +22,9 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X go-sea/internal/version.Version={{.Version}}
-      - -X go-sea/internal/version.Commit={{.Commit}}
-      - -X go-sea/internal/version.Date={{.Date}}
+      - -X github.com/borland502/go-sea/internal/version.Version={{.Version}}
+      - -X github.com/borland502/go-sea/internal/version.Commit={{.Commit}}
+      - -X github.com/borland502/go-sea/internal/version.Date={{.Date}}
 
 checksum:
   name_template: checksums.txt
